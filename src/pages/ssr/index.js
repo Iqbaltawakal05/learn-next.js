@@ -1,3 +1,4 @@
+import FoodLayout from "@/layout/FoodLayout";
 import axios from "axios";
 
 export async function getServerSideProps(context) {
@@ -10,12 +11,14 @@ export async function getServerSideProps(context) {
 
 export default function Home({ foods }) {
   return (
-    <div className="space-y-8">
-      {foods.map((food) => (
-        <div>
-          <img src={food.imageUrl} className="w-64 aspect-video" />
-        </div>
-      ))}
-    </div>
+    <FoodLayout>
+      <div className="space-y-8">
+        {foods.map((food) => (
+          <div>
+            <img src={food.imageUrl} className="w-64 aspect-video" />
+          </div>
+        ))}
+      </div>
+    </FoodLayout>
   );
 }
