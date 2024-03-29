@@ -1,16 +1,18 @@
-export default function FoodForm({ title, defaultNama, defaultUrlGambar, onSubmitFood, loading }) {
+export default function FoodForm({ title, defaultNama, defaultUrlGambar, defaultDescription, defaultIngredients, onSubmitFood, loading }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
     const name = formData.get("namaMakanan");
     const imageUrl = formData.get("gambarMakanan");
+    const description = formData.get("deskripsiMakanan");
+    const ingredients = formData.get("bahanMakanan");
 
-    onSubmitFood({ name, imageUrl, description: "    ", ingredients: [] });
+    onSubmitFood({ name, imageUrl, description: `${description}`, ingredients: [ `${ingredients}` ] });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="grid w-1/2 justify-center gap-2">
+    <form onSubmit={handleSubmit}>
       <h5 className="text-xl text-center font-bold">{title}</h5>
 
       <label>Nama:</label>
@@ -19,10 +21,16 @@ export default function FoodForm({ title, defaultNama, defaultUrlGambar, onSubmi
       <label>URL Gambar:</label>
       <input defaultValue={defaultUrlGambar} name="gambarMakanan" className="text-black" placeholder="url gambar" />
 
+      <label>Deskripsi:</label>
+      <textarea defaultValue={defaultDescription} name="deskripsiMakanan" className="text-black" placeholder="deskripsi makanan" />
+
+      <label>Bahan:</label>
+      <input defaultValue={defaultIngredients} name="bahanMakanan" className="text-black" placeholder="bahan makanan" />
+
       <button
         type="submit"
         disabled={loading}
-        className={`${loading ? "bg-gray-500" : "bg-blue-500"} p-1 rounded-full`}
+        className="formButton"
       >
         {title}
       </button>
